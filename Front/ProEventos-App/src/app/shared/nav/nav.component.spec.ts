@@ -9,7 +9,7 @@ describe('NavComponent', () => {
   let component: NavComponent;
   let fixture: ComponentFixture<NavComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(async(()   => {
     TestBed.configureTestingModule({
       declarations: [ NavComponent ]
     })
