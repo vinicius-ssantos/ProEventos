@@ -1,5 +1,5 @@
 import { ValidatorField } from './../../../helpers/ValidatorField';
-import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
-
 export class RegistrationComponent implements OnInit {
 
   form!: FormGroup;
@@ -17,24 +16,25 @@ export class RegistrationComponent implements OnInit {
   get f(): any { return this.form.controls; }
 
   ngOnInit(): void {
-    this.validation()
+    this.validation();
   }
 
-
-
-  public validation(): void {
+  private validation(): void {
 
     const formOptions: AbstractControlOptions = {
       validators: ValidatorField.MustMatch('senha', 'confirmeSenha')
-
     };
 
     this.form = this.fb.group({
       primeiroNome: ['', Validators.required],
       ultimoNome: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['',
+        [Validators.required, Validators.email]
+      ],
       userName: ['', Validators.required],
-      senha: ['', [Validators.required, Validators.minLength(6)]],
+      senha: ['',
+        [Validators.required, Validators.minLength(6)]
+      ],
       confirmeSenha: ['', Validators.required],
     }, formOptions);
   }

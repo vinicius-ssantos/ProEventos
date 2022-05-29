@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using ProEventos.Persistence;
-using ProEventos.Persistence.Contextos;
 using ProEventos.Application.Contratos;
 using Microsoft.AspNetCore.Http;
 using ProEventos.Application.Dtos;
-
 
 namespace ProEventos.API.Controllers
 {
@@ -32,7 +26,6 @@ namespace ProEventos.API.Controllers
                 var eventos = await _eventoService.GetAllEventosAsync(true);
                 if (eventos == null) return NoContent();
 
-
                 return Ok(eventos);
             }
             catch (Exception ex)
@@ -49,7 +42,6 @@ namespace ProEventos.API.Controllers
             {
                 var evento = await _eventoService.GetEventoByIdAsync(id, true);
                 if (evento == null) return NoContent();
-
 
                 return Ok(evento);
             }
@@ -68,7 +60,6 @@ namespace ProEventos.API.Controllers
                 var evento = await _eventoService.GetAllEventosByTemaAsync(tema, true);
                 if (evento == null) return NoContent();
 
-
                 return Ok(evento);
             }
             catch (Exception ex)
@@ -85,7 +76,6 @@ namespace ProEventos.API.Controllers
             {
                 var evento = await _eventoService.AddEventos(model);
                 if (evento == null) return NoContent();
-
 
                 return Ok(evento);
             }
@@ -104,7 +94,6 @@ namespace ProEventos.API.Controllers
                 var evento = await _eventoService.UpdateEvento(id, model);
                 if (evento == null) return NoContent();
 
-
                 return Ok(evento);
             }
             catch (Exception ex)
@@ -122,10 +111,9 @@ namespace ProEventos.API.Controllers
                 var evento = await _eventoService.GetEventoByIdAsync(id, true);
                 if (evento == null) return NoContent();
 
-
-                return await _eventoService.DeleteEvento(id) ?
-                       Ok("Deletado") :
-                       throw new Exception("Ocorreu um problema não especifico ao tentar deletar Evento.");
+                return await _eventoService.DeleteEvento(id) 
+                       ? Ok(new { message = "Deletado" }) 
+                       : throw new Exception("Ocorreu um problem não específico ao tentar deletar Evento.");
             }
             catch (Exception ex)
             {
